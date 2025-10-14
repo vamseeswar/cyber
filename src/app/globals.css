@@ -70,25 +70,15 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/* Global Styles with Enhanced Animated Background */
-* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  body {
+    @apply text-foreground;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(-45deg, 
       #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, 
@@ -100,7 +90,10 @@ body {
     color: #761f77;
     line-height: 1.6;
     min-height: 100vh;
+  }
 }
+
+/* Global Styles with Enhanced Animated Background */
 
  @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -168,11 +161,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-*{
-  padding:0;
-  margin: 0;
-  box-sizing: border-box;
-}
+
 .container h3{
   font-size: 25px;
   color:rgb(34, 255, 0);
