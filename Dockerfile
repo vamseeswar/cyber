@@ -17,18 +17,13 @@ RUN \
 # Rebuild the source code only when needed
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN echo "--- Listing current directory ---"
-RUN ls -la
-RUN echo "--- Listing node_modules/.bin ---"
-RUN ls -la node_modules/.bin
 
 RUN npm run build
 
