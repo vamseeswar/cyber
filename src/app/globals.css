@@ -89,27 +89,20 @@
 }
 
 body {
+    @apply bg-background text-foreground;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(-45deg, 
-      #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, 
-      #84fab0, #8fd3f4, #cfd9df, #a6c0fe,
-      #ff9a9e, #fad0c4, #fbc2eb, #a18cd1
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
-    color: #761f77;
     line-height: 1.6;
     min-height: 100vh;
-}
+    background: linear-gradient(-45deg, #fbc2eb, #a18cd1, #84fab0);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
 
  @keyframes gradientShift {
     0% { background-position: 0% 50%; }
-    25% { background-position: 50% 100%; }
     50% { background-position: 100% 50%; }
-    75% { background-position: 50% 0%; }
     100% { background-position: 0% 50%; }
 }
-
 /* Hero Section with Glassmorphism Effect */
 .hero {
     background: rgba(243, 241, 245, 0.7);
