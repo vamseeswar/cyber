@@ -87,7 +87,12 @@ export default function DashboardPage() {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
-                  
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'hsl(var(--background))',
+                      borderColor: 'hsl(var(--border))',
+                    }}
+                  />
                   <Legend />
                   <Bar dataKey="exfiltrated" fill="#8884d8" isAnimationActive={true} />
                   <Bar dataKey="detected" fill="#82ca9d" isAnimationActive={true} />
