@@ -1,9 +1,7 @@
 
 'use client'
 
-import { useState, useEffect } from "react"
-import { signIn, useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -11,32 +9,11 @@ import { Label } from "@/components/ui/label"
 
 export default function AuthPage() {
   const [isSigningUp, setIsSigningUp] = useState(false)
-  const { data: session } = useSession()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (session) {
-      router.push('/')
-    }
-  }, [session, router])
-
-  const handleGoogleSignIn = () => {
-    signIn('google', { callbackUrl: '/' })
-  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // This is a simplified example. 
-    // In a real app, you would handle form state and call signIn for credentials.
-    const email = event.currentTarget.email.value;
-    const password = event.currentTarget.password.value;
-    console.log({ email, password });
-    // Example for credentials sign in (requires Credentials provider setup in next-auth)
-    // signIn('credentials', { email, password, callbackUrl: '/' });
-  }
-
-  if (session) {
-    return <p>Redirecting...</p>; // Or a loading spinner
+    // Authentication is disabled. Do nothing.
+    console.log("Authentication is currently disabled.");
   }
 
   return (
@@ -84,7 +61,7 @@ export default function AuthPage() {
                     </span>
                 </div>
             </div>
-            <Button variant="outline" className="w-full" onClick={handleGoogleSignIn}>
+            <Button variant="outline" className="w-full" onClick={() => console.log('Authentication is currently disabled.')}>
                 Sign in with Google
             </Button>
             <p className="text-sm text-muted-foreground">
