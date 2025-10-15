@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex`}>
+      <body className={`${inter.className}`}>
         <Providers>
           <Navbar />
           <main className="w-full pt-20 p-4 sm:p-6 lg:p-8 bg-background-primary">
