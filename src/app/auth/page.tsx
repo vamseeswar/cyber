@@ -1,7 +1,9 @@
 
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,6 +11,33 @@ import { Label } from "@/components/ui/label"
 
 export default function AuthPage() {
   const [isSigningUp, setIsSigningUp] = useState(false)
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (session) {
+      router.push('/')
+    }
+  }, [session, router])
+
+  const handleGoogleSignIn = () => {
+    signIn('google', { callbackUrl: '/' })
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // This is a simplified example. 
+    // In a real app, you would handle form state and call signIn for credentials.
+    const email = event.currentTarget.email.value;
+    const password = event.currentTarget.password.value;
+    console.log({ email, password });
+    // Example for credentials sign in (requires Credentials provider setup in next-auth)
+    // signIn('credentials', { email, password, callbackUrl: '/' });
+  }
+
+  if (session) {
+    return <p>Redirecting...</p>; // Or a loading spinner
+  }
 
   return (
     <div className="flex items-center justify-center h-full">
@@ -19,29 +48,31 @@ export default function AuthPage() {
             {isSigningUp ? 'Enter your details to get started.' : 'Sign in to continue to your dashboard.'}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {isSigningUp && (
+        <form onSubmit={handleSubmit}>
+          <CardContent className="space-y-4">
+            {isSigningUp && (
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" placeholder="Your Name" required />
+              </div>
+            )}
             <div className="grid gap-2">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Your Name" required />
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="name@example.com" required />
             </div>
-          )}
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="name@example.com" required />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
-          </div>
-          {isSigningUp && (
             <div className="grid gap-2">
-              <Label htmlFor="confirm-password">Confirm Password</Label>
-              <Input id="confirm-password" type="password" required />
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" required />
             </div>
-          )}
-          <Button className="w-full mt-4">{isSigningUp ? 'Sign Up' : 'Sign In'}</Button>
-        </CardContent>
+            {isSigningUp && (
+              <div className="grid gap-2">
+                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Input id="confirm-password" type="password" required />
+              </div>
+            )}
+            <Button type="submit" className="w-full mt-4">{isSigningUp ? 'Sign Up' : 'Sign In'}</Button>
+          </CardContent>
+        </form>
         <CardFooter className="flex flex-col items-center space-y-4">
             <div className="relative w-full">
                 <div className="absolute inset-0 flex items-center">
@@ -53,7 +84,7 @@ export default function AuthPage() {
                     </span>
                 </div>
             </div>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={handleGoogleSignIn}>
                 Sign in with Google
             </Button>
             <p className="text-sm text-muted-foreground">
