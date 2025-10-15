@@ -19,7 +19,7 @@ export default function Navbar() {
   const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg">
+    <header id="main-navbar" className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg">
       <nav className="container mx-auto flex items-center justify-between p-4">
         <Link href="/" className="flex items-center gap-2 font-semibold text-white">
           <GitGraph className="h-6 w-6" />
