@@ -23,9 +23,11 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <Providers>
           <Navbar />
-          <main className="w-full pt-20 p-4 sm:p-6 lg:p-8 bg-background-primary">
-            {children}
-          </main>
+          <div className="pt-20">
+            <main className="w-full p-4 sm:p-6 lg:p-8 bg-background-primary">
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>
